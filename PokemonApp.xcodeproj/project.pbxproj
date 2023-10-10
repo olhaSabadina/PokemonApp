@@ -9,19 +9,35 @@
 /* Begin PBXBuildFile section */
 		2008F5B82AD5518A00BDD1A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5B72AD5518A00BDD1A9 /* AppDelegate.swift */; };
 		2008F5BA2AD5518A00BDD1A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5B92AD5518A00BDD1A9 /* SceneDelegate.swift */; };
-		2008F5BC2AD5518A00BDD1A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5BB2AD5518A00BDD1A9 /* ViewController.swift */; };
+		2008F5BC2AD5518A00BDD1A9 /* FirstScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5BB2AD5518A00BDD1A9 /* FirstScreenViewController.swift */; };
 		2008F5C12AD5518D00BDD1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2008F5C02AD5518D00BDD1A9 /* Assets.xcassets */; };
 		2008F5C42AD5518D00BDD1A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2008F5C22AD5518D00BDD1A9 /* LaunchScreen.storyboard */; };
+		2008F5D42AD586FF00BDD1A9 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2008F5D32AD586FF00BDD1A9 /* Lato-Bold.ttf */; };
+		2008F5D62AD5871E00BDD1A9 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2008F5D52AD5871E00BDD1A9 /* Lato-Regular.ttf */; };
+		2008F5D82AD5882500BDD1A9 /* FontsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5D72AD5882500BDD1A9 /* FontsEnum.swift */; };
+		2008F5DB2AD5B72F00BDD1A9 /* TitleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5DA2AD5B72F00BDD1A9 /* TitleConstants.swift */; };
+		2008F5E02AD5C95400BDD1A9 /* FirstScreenVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5DF2AD5C95400BDD1A9 /* FirstScreenVC+CollectionView.swift */; };
+		2008F5E22AD5CB1400BDD1A9 /* FirstScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E12AD5CB1400BDD1A9 /* FirstScreenViewModel.swift */; };
+		2008F5E42AD5D01F00BDD1A9 /* FirstScreenVCCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E32AD5D01F00BDD1A9 /* FirstScreenVCCollectionCell.swift */; };
+		2008F5E72AD5E73E00BDD1A9 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2008F5B42AD5518A00BDD1A9 /* PokemonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2008F5B72AD5518A00BDD1A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2008F5B92AD5518A00BDD1A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2008F5BB2AD5518A00BDD1A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2008F5BB2AD5518A00BDD1A9 /* FirstScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenViewController.swift; sourceTree = "<group>"; };
 		2008F5C02AD5518D00BDD1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2008F5C32AD5518D00BDD1A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2008F5C52AD5518E00BDD1A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2008F5D32AD586FF00BDD1A9 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2008F5D52AD5871E00BDD1A9 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2008F5D72AD5882500BDD1A9 /* FontsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsEnum.swift; sourceTree = "<group>"; };
+		2008F5DA2AD5B72F00BDD1A9 /* TitleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleConstants.swift; sourceTree = "<group>"; };
+		2008F5DF2AD5C95400BDD1A9 /* FirstScreenVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirstScreenVC+CollectionView.swift"; sourceTree = "<group>"; };
+		2008F5E12AD5CB1400BDD1A9 /* FirstScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenViewModel.swift; sourceTree = "<group>"; };
+		2008F5E32AD5D01F00BDD1A9 /* FirstScreenVCCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVCCollectionCell.swift; sourceTree = "<group>"; };
+		2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				2008F5CB2AD557B500BDD1A9 /* Applications */,
-				2008F5CE2AD5584500BDD1A9 /* Controllers */,
+				2008F5E52AD5E73E00BDD1A9 /* CompositionalLayout */,
+				2008F5D92AD5883600BDD1A9 /* Enums */,
 				2008F5CF2AD5593E00BDD1A9 /* Model */,
 				2008F5CD2AD5583100BDD1A9 /* Views */,
 				2008F5CC2AD557E300BDD1A9 /* ViewModel */,
@@ -76,6 +93,7 @@
 		2008F5CC2AD557E300BDD1A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2008F5E12AD5CB1400BDD1A9 /* FirstScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -83,16 +101,11 @@
 		2008F5CD2AD5583100BDD1A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2008F5BB2AD5518A00BDD1A9 /* FirstScreenViewController.swift */,
+				2008F5DF2AD5C95400BDD1A9 /* FirstScreenVC+CollectionView.swift */,
+				2008F5E32AD5D01F00BDD1A9 /* FirstScreenVCCollectionCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2008F5CE2AD5584500BDD1A9 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2008F5BB2AD5518A00BDD1A9 /* ViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		2008F5CF2AD5593E00BDD1A9 /* Model */ = {
@@ -108,8 +121,35 @@
 				2008F5C02AD5518D00BDD1A9 /* Assets.xcassets */,
 				2008F5C22AD5518D00BDD1A9 /* LaunchScreen.storyboard */,
 				2008F5C52AD5518E00BDD1A9 /* Info.plist */,
+				2008F5D12AD5866200BDD1A9 /* Fonts */,
 			);
 			path = Resourses;
+			sourceTree = "<group>";
+		};
+		2008F5D12AD5866200BDD1A9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2008F5D52AD5871E00BDD1A9 /* Lato-Regular.ttf */,
+				2008F5D32AD586FF00BDD1A9 /* Lato-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		2008F5D92AD5883600BDD1A9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2008F5D72AD5882500BDD1A9 /* FontsEnum.swift */,
+				2008F5DA2AD5B72F00BDD1A9 /* TitleConstants.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2008F5E52AD5E73E00BDD1A9 /* CompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */,
+			);
+			path = CompositionalLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,7 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2008F5C42AD5518D00BDD1A9 /* LaunchScreen.storyboard in Resources */,
+				2008F5D42AD586FF00BDD1A9 /* Lato-Bold.ttf in Resources */,
 				2008F5C12AD5518D00BDD1A9 /* Assets.xcassets in Resources */,
+				2008F5D62AD5871E00BDD1A9 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,9 +224,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2008F5BC2AD5518A00BDD1A9 /* ViewController.swift in Sources */,
+				2008F5BC2AD5518A00BDD1A9 /* FirstScreenViewController.swift in Sources */,
 				2008F5B82AD5518A00BDD1A9 /* AppDelegate.swift in Sources */,
+				2008F5E42AD5D01F00BDD1A9 /* FirstScreenVCCollectionCell.swift in Sources */,
+				2008F5E22AD5CB1400BDD1A9 /* FirstScreenViewModel.swift in Sources */,
+				2008F5E02AD5C95400BDD1A9 /* FirstScreenVC+CollectionView.swift in Sources */,
+				2008F5D82AD5882500BDD1A9 /* FontsEnum.swift in Sources */,
+				2008F5DB2AD5B72F00BDD1A9 /* TitleConstants.swift in Sources */,
 				2008F5BA2AD5518A00BDD1A9 /* SceneDelegate.swift in Sources */,
+				2008F5E72AD5E73E00BDD1A9 /* CompositionalLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
