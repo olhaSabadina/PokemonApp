@@ -21,6 +21,7 @@
 		2008F5E42AD5D01F00BDD1A9 /* PokemonsListVCCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E32AD5D01F00BDD1A9 /* PokemonsListVCCollectionCell.swift */; };
 		2008F5E72AD5E73E00BDD1A9 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */; };
 		207D908A2AD685390023E309 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D90892AD685390023E309 /* UIView+Extension.swift */; };
+		207D908C2AD69C8B0023E309 /* LightningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D908B2AD69C8B0023E309 /* LightningsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2008F5E32AD5D01F00BDD1A9 /* PokemonsListVCCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListVCCollectionCell.swift; sourceTree = "<group>"; };
 		2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
 		207D90892AD685390023E309 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		207D908B2AD69C8B0023E309 /* LightningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				2008F5BB2AD5518A00BDD1A9 /* PokemonsListViewController.swift */,
 				2008F5DF2AD5C95400BDD1A9 /* PokemonsListVC+CollectionView.swift */,
 				2008F5E32AD5D01F00BDD1A9 /* PokemonsListVCCollectionCell.swift */,
+				207D908B2AD69C8B0023E309 /* LightningsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2008F5BC2AD5518A00BDD1A9 /* PokemonsListViewController.swift in Sources */,
+				207D908C2AD69C8B0023E309 /* LightningsView.swift in Sources */,
 				2008F5B82AD5518A00BDD1A9 /* AppDelegate.swift in Sources */,
 				2008F5E42AD5D01F00BDD1A9 /* PokemonsListVCCollectionCell.swift in Sources */,
 				2008F5E22AD5CB1400BDD1A9 /* PokemonsListViewModel.swift in Sources */,

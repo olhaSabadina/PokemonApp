@@ -10,6 +10,7 @@ import UIKit
 class PokemonsListViewController: UIViewController {
     
     var collectionView : UICollectionView?
+    var lightningsRedView = LightningsView()
     var viewModel = PokemonsListViewModel()
     
     //MARK: - life cycle
@@ -17,6 +18,7 @@ class PokemonsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        setLightningsView()
         setCollectionView()
         setConstraints()
     }
@@ -30,11 +32,17 @@ class PokemonsListViewController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsEnum.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
     }
     
+    private func setLightningsView() {
+        lightningsRedView = LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596))
+        view.addSubview(lightningsRedView)
+    }
+    
     // MARK: - CollectionView:
     
     private func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView?.register(PokemonsListVCCollectionCell.self, forCellWithReuseIdentifier: PokemonsListVCCollectionCell.identCell)
+        collectionView?.backgroundColor = .clear
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.translatesAutoresizingMaskIntoConstraints = false
