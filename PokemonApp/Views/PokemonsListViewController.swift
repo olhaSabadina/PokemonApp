@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PokemonsListViewController.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 10.10.2023.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class FirstScreenViewController: UIViewController {
+class PokemonsListViewController: UIViewController {
     
     var collectionView : UICollectionView?
-    var viewModel = FirstScreenViewModel()
+    var viewModel = PokemonsListViewModel()
     
     //MARK: - life cycle
     
@@ -33,10 +33,8 @@ class FirstScreenViewController: UIViewController {
     // MARK: - CollectionView:
     
     private func setCollectionView() {
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView?.backgroundColor = .red
-        collectionView?.register(FirstScreenVCCollectionCell.self, forCellWithReuseIdentifier: FirstScreenVCCollectionCell.identCell)
+        collectionView?.register(PokemonsListVCCollectionCell.self, forCellWithReuseIdentifier: PokemonsListVCCollectionCell.identCell)
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.translatesAutoresizingMaskIntoConstraints = false
@@ -62,8 +60,8 @@ class FirstScreenViewController: UIViewController {
         guard let collectionView = collectionView else { return }
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
