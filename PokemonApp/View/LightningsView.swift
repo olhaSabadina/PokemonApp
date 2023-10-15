@@ -8,10 +8,18 @@
 import UIKit
 
 class LightningsView: UIView {
+
+    var color: UIColor
     
     override init(frame: CGRect) {
-        super .init(frame: frame)
+        self.color = .red
+        super.init(frame: frame)
         setupView()
+    }
+    
+    convenience init(frame: CGRect, color: UIColor) {
+        self.init(frame: frame)
+        self.color = color
     }
     
     required init?(coder: NSCoder) {
@@ -19,6 +27,7 @@ class LightningsView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+        removeAllSublayers()
         drawRedLight()
         drawGrayLight()
         setupView()
@@ -26,6 +35,15 @@ class LightningsView: UIView {
     
     private func setupView() {
         clipsToBounds = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func removeAllSublayers() {
+        if let sublayers = self.layer.sublayers {
+            for sublayer in sublayers {
+                sublayer.removeFromSuperlayer()
+            }
+        }
     }
     
     private func drawRedLight() {
@@ -34,7 +52,7 @@ class LightningsView: UIView {
         layer.frame = .init(x: 0, y: 0, width: 268, height: 596)
         buildLihningByPoints(shape: lightning)
         layer.path = lightning.cgPath
-        layer.fillColor = UIColor.red.withAlphaComponent(0.4).cgColor
+        layer.fillColor = color.withAlphaComponent(0.4).cgColor
         self.layer.addSublayer(layer)
     }
     

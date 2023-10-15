@@ -1,5 +1,5 @@
 //
-//  PokemonsListVCCollectionCell.swift
+//  ListCell.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 10.10.2023.
@@ -7,15 +7,14 @@
 
 import UIKit
 
-class PokemonsListVCCollectionCell: UICollectionViewCell {
+class ListCell: UICollectionViewCell {
 
-    static var identCell = "FirstScreenVCColletyionCell"
-    
+    static var CellID = "FirstScreenVCColletyionCell"
     
     let imageView = UIImageView()
     var nameLabel = UILabel()
     var skillsLabel = UILabel()
-    private let viewModel = PokemonsListViewModel()
+    private let viewModel = ListPokemonViewModel()
     private var stack = UIStackView()
     
     override init(frame: CGRect) {
@@ -59,10 +58,10 @@ class PokemonsListVCCollectionCell: UICollectionViewCell {
             label.textAlignment = .left
             label.numberOfLines = 0
         }
-        nameLabel.font = UIFont(name: FontsEnum.latoBold, size: 18)
-        nameLabel.textColor = UIColor(red: 228, green: 0, blue: 0, alpha: 1)
-        skillsLabel.font = UIFont(name: FontsEnum.latoRegular, size: 15)
-        skillsLabel.textColor = .gray
+        nameLabel.font = UIFont(name: FontsConstants.latoBold, size: 18)
+        nameLabel.textColor = .red
+        skillsLabel.font = UIFont(name: FontsConstants.latoRegular, size: 15)
+        skillsLabel.textColor = UIColor(named: "CustomGray")
         
         nameLabel.text = viewModel.pokemonsName()
         skillsLabel.text = viewModel.pokemonsSkill()

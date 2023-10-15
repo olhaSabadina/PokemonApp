@@ -1,5 +1,5 @@
 //
-//  PokemonsListViewController.swift
+//  ListViewController.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 10.10.2023.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class PokemonsListViewController: UIViewController {
+class ListViewController: UIViewController {
     
     var collectionView : UICollectionView?
     var lightningsRedView = LightningsView()
-    var viewModel = PokemonsListViewModel()
+    var viewModel = ListPokemonViewModel()
     
-    //MARK: - life cycle
+    //MARK: - life cycle:
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +23,19 @@ class PokemonsListViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     // MARK: - private func:
     
     private func setView() {
         view.backgroundColor = .systemBackground
         title = TitleConstants.title
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsEnum.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsConstants.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
     }
     
     private func setLightningsView() {
@@ -41,7 +47,7 @@ class PokemonsListViewController: UIViewController {
     
     private func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView?.register(PokemonsListVCCollectionCell.self, forCellWithReuseIdentifier: PokemonsListVCCollectionCell.identCell)
+        collectionView?.register(ListCell.self, forCellWithReuseIdentifier: ListCell.CellID)
         collectionView?.backgroundColor = .clear
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -67,10 +73,36 @@ class PokemonsListViewController: UIViewController {
     private func setConstraints() {
         guard let collectionView = collectionView else { return }
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: navigationItem.titleView?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
+//MARK: - CollectionViewDelegate, DataSource:
+
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.listNumberOfItemsInSection()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.CellID, for: indexPath) as? ListCell else {return UICollectionViewCell()}
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? ListCell
+        
+        let propertyViewModel = PropertyTableViewModel()
+        
+        let descriptionVC = DetailViewController(viewModel: propertyViewModel)
+
+        navigationController?.pushViewController(descriptionVC, animated: true)
+        
+    }
+    
+}
+
