@@ -36,6 +36,10 @@ class ListCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        nameLabel.text = ""
+        skillsLabel.text = ""
+        imageView.image = nil
+        
     }
     //MARK: -  Private function:
     
@@ -63,8 +67,8 @@ class ListCell: UICollectionViewCell {
         skillsLabel.font = UIFont(name: FontsConstants.latoRegular, size: 15)
         skillsLabel.textColor = UIColor(named: "CustomGray")
         
-        nameLabel.text = viewModel.pokemonsName()
-        skillsLabel.text = viewModel.pokemonsSkill()
+//        nameLabel.text = viewModel.pokemonsName()
+//        skillsLabel.text = viewModel.pokemonsSkill()
     }
     
     private func setStack() {
@@ -78,7 +82,7 @@ class ListCell: UICollectionViewCell {
     }
     
     private func setImageView() {
-        imageView.image = viewModel.pokemonsPhoto()
+//        imageView.image = viewModel.pokemonsPhoto()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
     }

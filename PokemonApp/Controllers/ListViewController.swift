@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class ListViewController: UIViewController {
     
     var collectionView : UICollectionView?
     var lightningsRedView = LightningsView()
     var viewModel = ListPokemonViewModel()
+    var cancellable = Set<AnyCancellable>()
     
     //MARK: - life cycle:
     
@@ -20,7 +22,9 @@ class ListViewController: UIViewController {
         setView()
         setLightningsView()
         setCollectionView()
+        sinkToVMPokemonsList()
         setConstraints()
+        viewModel.fechPokemonsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +32,7 @@ class ListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    // MARK: - private func:
+    // MARK: - set view func:
     
     private func setView() {
         view.backgroundColor = .systemBackground
@@ -42,6 +46,22 @@ class ListViewController: UIViewController {
         lightningsRedView = LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596))
         view.addSubview(lightningsRedView)
     }
+    
+    //MARK: - fech pokemons func:
+    
+    private func sinkToVMPokemonsList() {
+        viewModel.$isReloadCollection
+            .receive(on: DispatchQueue.main)
+            .sink { isReload in
+                if isReload {
+                    self.collectionView?.reloadData()
+                    self.viewModel.isReloadCollection = false
+                }
+        }.store(in: &cancellable)
+    }
+    
+    
+    
     
     // MARK: - CollectionView:
     

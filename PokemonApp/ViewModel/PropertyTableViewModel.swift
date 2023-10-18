@@ -1,5 +1,5 @@
 //
-//  PokemonsViewModel.swift
+//  PropertyTableViewModel.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 10.10.2023.
@@ -10,7 +10,7 @@ import Combine
 
 class PropertyTableViewModel {
     
-   @Published var cellModels: [CellModel] = []
+   @Published var cellModels: [SkillsCellModel] = []
     
     init () {
         fetchProperties()
@@ -20,19 +20,19 @@ class PropertyTableViewModel {
         //получаем данные распарсиваем и превращ в массив модэлек
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
             self.cellModels = [
-                CellModel(titleProperty: "Height",
+                SkillsCellModel(titleProperty: "Height",
                           valueProperty: "1120mm",
                           attackPowerCount: nil),
-                CellModel(titleProperty: "Weight",
+                SkillsCellModel(titleProperty: "Weight",
                           valueProperty: "7 kg",
                           attackPowerCount: nil),
-                CellModel(titleProperty: "Power",
+                SkillsCellModel(titleProperty: "Power",
                           valueProperty: "Explosive Farting",
                           attackPowerCount: nil),
-                CellModel(titleProperty: "Attack",
+                SkillsCellModel(titleProperty: "Attack",
                           valueProperty: "Fire Spins",
                           attackPowerCount: 4),
-                CellModel(titleProperty: "Damage",
+                SkillsCellModel(titleProperty: "Damage",
                           valueProperty: "100",
                           attackPowerCount: nil),
             ]

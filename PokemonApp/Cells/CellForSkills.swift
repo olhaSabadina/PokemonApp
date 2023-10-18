@@ -15,7 +15,7 @@ class CellForSkills: UITableViewCell {
     var skillsDescriptionLabel = UILabel()
     var skillsStack = UIStackView()
     var skillsStackWithName = UIStackView()
-    var model: CellModel? {
+    var model: SkillsCellModel? {
         didSet {
             configureCell()
         }
