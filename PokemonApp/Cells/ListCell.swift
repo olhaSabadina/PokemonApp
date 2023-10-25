@@ -16,7 +16,7 @@ class ListCell: UICollectionViewCell {
     private var nameLabel = UILabel()
     private var skillsLabel = UILabel()
     private var stack = UIStackView()
-    var pokemon: Pokemon? {
+    var pokemon: PokemonModel? {
         didSet {
             updateCell()
         }

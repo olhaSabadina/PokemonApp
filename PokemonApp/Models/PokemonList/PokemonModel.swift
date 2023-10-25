@@ -1,5 +1,5 @@
 //
-//  PokemonDescriptionModel.swift
+//  Pokemon.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 15.10.2023.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Pokemon
-struct Pokemon: Codable {
+struct PokemonModel: Codable {
     let abilities: [Ability]
     let baseExperience: Int
     let forms: [Species]
@@ -27,6 +27,16 @@ struct Pokemon: Codable {
     let stats: [Stat]
     let types: [TypeElement]
     let weight: Int
+    
+    var heightConvert: String {
+        return String(height) + " mm"
+    }
+    var weightConvert: String {
+        return String(weight) + " kg"
+    }
+    var damageConvert: String {
+        return String(order)
+    }
 
     enum CodingKeys: String, CodingKey {
         case abilities

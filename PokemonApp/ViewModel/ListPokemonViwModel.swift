@@ -13,7 +13,7 @@ class ListPokemonViewModel {
     private let networkManager = NetworkManager()
     private var cancellable = Set<AnyCancellable>()
     
-    @Published var pokemonsList: [Pokemon] = []
+    @Published var pokemonsList: [PokemonModel] = []
     @Published var error: Error? {
         didSet {
             print(error?.localizedDescription ?? "Yura")
@@ -40,7 +40,8 @@ class ListPokemonViewModel {
                     self.error = error
                 }
             } receiveValue: { pokemonArray in
-                self.pokemonsList = pokemonArray
+                
+                self.pokemonsList = pokemonArray.sorted { $0.name < $1.name }
             }
             .store(in: &cancellable)
     }
@@ -60,8 +61,8 @@ class ListPokemonViewModel {
             .eraseToAnyPublisher()
     }
     
-    private func getAllPokemonts(pokemons: [PokemonID]) -> AnyPublisher<[Pokemon], Error> {
-        let publishers: [AnyPublisher<Pokemon,Error>] =
+    private func getAllPokemonts(pokemons: [PokemonID]) -> AnyPublisher<[PokemonModel], Error> {
+        let publishers: [AnyPublisher<PokemonModel,Error>] =
         pokemons.map(loadPokemon)
         
         return Publishers.MergeMany(publishers)
@@ -73,7 +74,7 @@ class ListPokemonViewModel {
         networkManager.fetchPokemon(urlString: urlString, type: PokemonID.self)
     }
     
-    private func loadPokemon(pokemonId: PokemonID) -> AnyPublisher<Pokemon, Error> {
-        networkManager.fetchPokemon(urlString: EndpointsURL.pokemonFromID(pokemonId.id).url, type: Pokemon.self)
+    private func loadPokemon(pokemonId: PokemonID) -> AnyPublisher<PokemonModel, Error> {
+        networkManager.fetchPokemon(urlString: EndpointsURL.pokemonFromID(pokemonId.id).url, type: PokemonModel.self)
     }
 }

@@ -10,7 +10,7 @@ import Combine
 
  enum EndpointsURL {
      static let baseUrl = "https://pokeapi.co/api/v2/"
-     static let pokemonsList = "ability/?limit=20"
+     static let pokemonsList = "ability/?limit=10"
     
      case pokemonUrls
      case pokemonFromID (Int)

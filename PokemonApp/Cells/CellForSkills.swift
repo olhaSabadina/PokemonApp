@@ -20,10 +20,14 @@ class CellForSkills: UITableViewCell {
             configureCell()
         }
     }
+    var isTitlePresent: Bool {
+        model?.titleProperty != nil
+    }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
-        setSkillsLabels()
+        setLabels()
         setSkillsStack()
         setConstraints()
     }
@@ -36,22 +40,27 @@ class CellForSkills: UITableViewCell {
         super.prepareForReuse()
         skillsNameLabel.text = ""
         skillsDescriptionLabel.text = ""
-        for view in skillsStack.arrangedSubviews {
-            skillsStack.removeArrangedSubview(view)
-        }
+        skillsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        skillsStackWithName.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func configureCell() {
         guard let model = model else { return }
         skillsNameLabel.text = model.titleProperty
         skillsDescriptionLabel.text = model.valueProperty
-        configureStack(count: model.attackPowerCount ?? 0)
+        configureStack(count: model.attackPowerCount)
     }
     
     private func configureStack(count: Int) {
-        if model?.attackPowerCount != nil {
+        
+        if model?.titleProperty != nil {
+            skillsStackWithName.addArrangedSubview(skillsNameLabel)
+            skillsNameLabel.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        }
+        skillsStackWithName.addArrangedSubview(skillsStack)
+        if count != 0 {
             for _ in 0..<count {
-                let imageView = UIImageView(image: .checkmark)
+                let imageView = UIImageView(image: UIImage(named: "Vector"))
                 imageView.contentMode = .scaleAspectFit
                 skillsStack.addArrangedSubview(imageView)
             }
@@ -60,33 +69,30 @@ class CellForSkills: UITableViewCell {
         skillsDescriptionLabel.setContentHuggingPriority(.init(240), for: .horizontal)
     }
     
-    private func setSkillsLabels() {
-        skillsNameLabel.font = UIFont(name: FontsConstants.latoRegular, size: 15)
-        skillsNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(skillsNameLabel)
-        skillsDescriptionLabel.font = UIFont(name: FontsConstants.latoRegular, size: 15)
+    private func setLabels() {
+        skillsNameLabel.font = UIFont(name: FontsConstants.latoRegular, size: 13)
+        skillsDescriptionLabel.font = UIFont(name: FontsConstants.latoRegular, size: 13)
         skillsDescriptionLabel.textColor = UIColor(named: "CustomGray")
+        skillsDescriptionLabel.numberOfLines = 0
     }
     
     private func setSkillsStack() {
         skillsStack.axis = .horizontal
         skillsStack.spacing = 5
         skillsStack.distribution = .fill
-        skillsStack.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(skillsStack)
+       
+        skillsStackWithName.axis = .horizontal
+        skillsStackWithName.translatesAutoresizingMaskIntoConstraints = false
+        skillsStackWithName.spacing = 15
+        addSubview(skillsStackWithName)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            skillsNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            skillsNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            skillsNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-            skillsNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
-            
-            skillsStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            skillsStack.leadingAnchor.constraint(equalTo: skillsNameLabel.trailingAnchor, constant: 10),
-            skillsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            skillsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            skillsStackWithName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            skillsStackWithName.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            skillsStackWithName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            skillsStackWithName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ])
     }
 }

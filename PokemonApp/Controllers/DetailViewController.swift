@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
     var viewModel: PropertySkillViewModel
     var nameLabel = UILabel()
     var imageView = UIImageView()
-    let segmentedControl = UISegmentedControl(items: ["About", "Stats", "Evolution", "Moves"])
+    let segmentedControl = PokemonSegmentControl()
     let detailTable = UITableView()
     var subscribers = Set<AnyCancellable>()
     
@@ -37,6 +37,8 @@ class DetailViewController: UIViewController {
         setNameLabel()
         setImageView()
         setSegmentedControl()
+        setItemsOnView()
+        sinkToSkillModels()
         setConstraints()
     }
     
@@ -44,6 +46,11 @@ class DetailViewController: UIViewController {
     
     @objc func backToPokemonsListViewController() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func selectedTag(_ sender: UISegmentedControl) {
+       let selectedSegmentTag = sender.selectedSegmentIndex
+        viewModel.selectedTag = selectedSegmentTag        
     }
     
     //MARK: - Private func:
@@ -77,29 +84,43 @@ class DetailViewController: UIViewController {
     }
     
     private func setSegmentedControl() {
-        segmentedControl.selectedSegmentTintColor = .none
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: FontsConstants.latoRegular, size: 15) ?? UIFont.systemFont(ofSize: 15)], for: .normal)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
+        segmentedControl.$selectedSegmentIndex
+            .sink { index in
+                self.viewModel.selectedTag = index
+            }
+            .store(in: &subscribers)
     }
     
     private func setDetailTable() {
         detailTable.register(CellForSkills.self, forCellReuseIdentifier: CellForSkills.CellID)
         detailTable.delegate = self
         detailTable.dataSource = self
+        detailTable.separatorStyle = .none
+        detailTable.showsVerticalScrollIndicator = false
         detailTable.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(detailTable)
     }
     
-    private func addDataFromModelsForCells() {
-        nameLabel.text = viewModel.pokemon.name
+    private func setItemsOnView() {
+        nameLabel.text = viewModel.pokemon.name.capitalizeFirstLetter()
         guard let urlImage = URL(string: viewModel.pokemon.sprites.frontDefault) else {
             return
         }
         imageView.sd_setImage(with: urlImage)
     }
+    
+    private func sinkToSkillModels() {
+        viewModel.$cellModels
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.detailTable.reloadData()
+            }
+            .store(in: &subscribers)
+    }
+    
+    
     
     //MARK: - Constraints:
     
@@ -112,14 +133,14 @@ class DetailViewController: UIViewController {
             nameLabel.heightAnchor.constraint(equalToConstant: 40),
             
             imageView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            imageView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
             
             segmentedControl.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 40),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 30),
             
             detailTable.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
             detailTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -134,15 +155,19 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.detailNumberOfRowsInSection()
+        return viewModel.numberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.CellID, for: indexPath) as? CellForSkills  else { return UITableViewCell() }
-            
-            
-            
-            return cell
+        
+        cell.model = viewModel.cellModels[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
