@@ -22,9 +22,8 @@ class ListViewController: UIViewController {
         setView()
         setLightningsView()
         setCollectionView()
-        sinkToVMPokemonsList()
+        sinkToPokemons()
         setConstraints()
-        viewModel.fechPokemonsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,19 +48,13 @@ class ListViewController: UIViewController {
     
     //MARK: - fech pokemons func:
     
-    private func sinkToVMPokemonsList() {
-        viewModel.$isReloadCollection
+    private func sinkToPokemons() {
+        viewModel.$pokemonsList
             .receive(on: DispatchQueue.main)
-            .sink { isReload in
-                if isReload {
-                    self.collectionView?.reloadData()
-                    self.viewModel.isReloadCollection = false
-                }
-        }.store(in: &cancellable)
+            .sink { _ in
+                self.collectionView?.reloadData()
+            }.store(in: &cancellable)
     }
-    
-    
-    
     
     // MARK: - CollectionView:
     
@@ -105,18 +98,21 @@ class ListViewController: UIViewController {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.listNumberOfItemsInSection()
+        viewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.CellID, for: indexPath) as? ListCell else {return UICollectionViewCell()}
+        cell.pokemon = viewModel.pokemonsList[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? ListCell
         
-        let propertyViewModel = PropertyTableViewModel()
+        guard let pokemon = cell?.pokemon else { return }
+        
+        let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
         
         let descriptionVC = DetailViewController(viewModel: propertyViewModel)
 

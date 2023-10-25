@@ -7,21 +7,20 @@
 
 import UIKit
 import Combine
+import SDWebImage
 
 class DetailViewController: UIViewController {
     
-    var viewModel: PropertyTableViewModel
-    let activityIndicator = UIActivityIndicatorView()
+    var viewModel: PropertySkillViewModel
     var nameLabel = UILabel()
     var imageView = UIImageView()
     let segmentedControl = UISegmentedControl(items: ["About", "Stats", "Evolution", "Moves"])
     let detailTable = UITableView()
     var subscribers = Set<AnyCancellable>()
     
-    init(viewModel: PropertyTableViewModel) {
+    init(viewModel: PropertySkillViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.activityIndicator.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -38,7 +37,6 @@ class DetailViewController: UIViewController {
         setNameLabel()
         setImageView()
         setSegmentedControl()
-        sinkToModelsForCells()
         setConstraints()
     }
     
@@ -52,15 +50,7 @@ class DetailViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .systemBackground
-        setActivityIndicator()
-    }
-    
-    private func setActivityIndicator() {
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = .large
-        activityIndicator.color = .blue
-        view.addSubview(activityIndicator)
+        
     }
     
     private func setLeftBarButton() {
@@ -97,28 +87,18 @@ class DetailViewController: UIViewController {
     
     private func setDetailTable() {
         detailTable.register(CellForSkills.self, forCellReuseIdentifier: CellForSkills.CellID)
-        detailTable.register(CellForPhrase.self, forCellReuseIdentifier: CellForPhrase.CellID)
         detailTable.delegate = self
         detailTable.dataSource = self
         detailTable.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(detailTable)
     }
     
-    private func sinkToModelsForCells() {
-        viewModel.$cellModels
-            .filter{!$0.isEmpty}
-            .sink { array in
-            DispatchQueue.main.async {
-                self.addDataFromModelsForCells()
-            }
-        }.store(in: &subscribers)
-    }
-    
     private func addDataFromModelsForCells() {
-        activityIndicator.stopAnimating()
-        nameLabel.text = "Mock name"
-        imageView.image = UIImage(named: "cat") //mock image
-        detailTable.reloadData()
+        nameLabel.text = viewModel.pokemon.name
+        guard let urlImage = URL(string: viewModel.pokemon.sprites.frontDefault) else {
+            return
+        }
+        imageView.sd_setImage(with: urlImage)
     }
     
     //MARK: - Constraints:
@@ -158,18 +138,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 5 , let cell = tableView.dequeueReusableCell(withIdentifier: CellForPhrase.CellID, for: indexPath) as? CellForPhrase {
+       
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.CellID, for: indexPath) as? CellForSkills  else { return UITableViewCell() }
             
-            cell.phraseLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi morbi tempus iaculis urna id volutpat lacus laoreet."
             
-            return cell
-            
-        } else if let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.CellID, for: indexPath) as? CellForSkills {
-            
-            cell.model = viewModel.cellModels[indexPath.row]
             
             return cell
-        }
-        return UITableViewCell()
     }
 }

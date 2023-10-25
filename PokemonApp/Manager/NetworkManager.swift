@@ -9,25 +9,26 @@ import Foundation
 import Combine
 
  enum EndpointsURL {
+     static let baseUrl = "https://pokeapi.co/api/v2/"
      static let pokemonsList = "ability/?limit=20"
-     static let about = "ability/{id or name}/"
-     static let stats = "stat/{id or name}/"
-     static let evolution = "evolution-chain/{id}/"
-     static let moves = "move/{id or name}/"
+    
+     case pokemonUrls
+     case pokemonFromID (Int)
+     
+     var url: String {
+         switch self {
+         case .pokemonUrls:
+             return EndpointsURL.baseUrl + EndpointsURL.pokemonsList
+         case .pokemonFromID(let id):
+             return EndpointsURL.baseUrl + "pokemon/\(id)/"
+         }
+     }
 }
-
 
 struct NetworkManager {
     
-    private let baseUrl = "https://pokeapi.co/api/v2/"
-    
-    func fetchPokemon<T:Codable>(url: String? = nil, type: T.Type) -> AnyPublisher<T,Error> {
-        
-        var urlString = baseUrl + EndpointsURL.pokemonsList
-        if let url {
-            urlString = url
-        }
-        
+    func fetchPokemon<T:Codable>(urlString: String, type: T.Type) -> AnyPublisher<T,Error> {
+
         guard let url = URL(string: urlString) else {
             return Fail(error: URLError(.badURL))
                 .eraseToAnyPublisher()

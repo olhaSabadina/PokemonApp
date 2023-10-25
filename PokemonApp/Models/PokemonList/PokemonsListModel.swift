@@ -9,20 +9,22 @@ import Foundation
 
 // MARK: - ListName
 struct PokemonsListModel: Codable {
-    let count: Int
-    let next: String
     let results: [Result]
     
-    var urlPokemonsAbility: [String] {
+    var pokemonsUrl: [String] {
         var urlArray: [String] = []
         results.forEach { urlArray.append($0.url) }
         return urlArray
     }
 }
 
-// MARK: - ResultListName
+// MARK: - Result
 struct Result: Codable {
     let name: String
     let url: String
 }
 
+// MARK: - ID Pokemon
+struct PokemonID: Codable {
+    let id: Int
+}

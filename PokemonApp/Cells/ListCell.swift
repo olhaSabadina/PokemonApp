@@ -6,23 +6,28 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ListCell: UICollectionViewCell {
 
     static var CellID = "FirstScreenVCColletyionCell"
     
-    let imageView = UIImageView()
-    var nameLabel = UILabel()
-    var skillsLabel = UILabel()
-    private let viewModel = ListPokemonViewModel()
+    private let imageView = UIImageView()
+    private var nameLabel = UILabel()
+    private var skillsLabel = UILabel()
     private var stack = UIStackView()
+    var pokemon: Pokemon? {
+        didSet {
+            updateCell()
+        }
+    }
     
     override init(frame: CGRect) {
         super .init(frame: frame)
         configureCell()
         setLabels()
-        setStack()
         setImageView()
+        setStack()
     }
     
     override func layoutSubviews() {
@@ -44,7 +49,13 @@ class ListCell: UICollectionViewCell {
     //MARK: -  Private function:
     
     private func updateCell() {
-        
+        nameLabel.text = pokemon?.name.uppercased()
+        skillsLabel.text = pokemon?.species.name
+        guard let imageString = pokemon?.sprites.frontDefault,
+              let urlImage = URL(string: imageString) else {
+            return
+        }
+        imageView.sd_setImage(with: urlImage)
     }
     
     private func configureCell() {
@@ -62,13 +73,10 @@ class ListCell: UICollectionViewCell {
             label.textAlignment = .left
             label.numberOfLines = 0
         }
-        nameLabel.font = UIFont(name: FontsConstants.latoBold, size: 18)
+        nameLabel.font = UIFont(name: FontsConstants.latoBold, size: 13)
         nameLabel.textColor = .red
-        skillsLabel.font = UIFont(name: FontsConstants.latoRegular, size: 15)
+        skillsLabel.font = UIFont(name: FontsConstants.latoRegular, size: 11)
         skillsLabel.textColor = UIColor(named: "CustomGray")
-        
-//        nameLabel.text = viewModel.pokemonsName()
-//        skillsLabel.text = viewModel.pokemonsSkill()
     }
     
     private func setStack() {
@@ -82,7 +90,6 @@ class ListCell: UICollectionViewCell {
     }
     
     private func setImageView() {
-//        imageView.image = viewModel.pokemonsPhoto()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
     }
@@ -93,12 +100,12 @@ class ListCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             stack.centerYAnchor.constraint(equalTo: centerYAnchor),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            stack.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -5),
+            stack.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 15),
             
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
         ])
     }
 }

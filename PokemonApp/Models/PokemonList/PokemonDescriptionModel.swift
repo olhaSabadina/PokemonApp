@@ -4,15 +4,11 @@
 //
 //  Created by Olga Sabadina on 15.10.2023.
 //
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let pokemonDescription = try? JSONDecoder().decode(PokemonDescription.self, from: jsonData)
 
 import Foundation
 
-// MARK: - PokemonDescription
-struct PokemonDescription: Codable {
+// MARK: - Pokemon
+struct Pokemon: Codable {
     let abilities: [Ability]
     let baseExperience: Int
     let forms: [Species]
@@ -25,7 +21,7 @@ struct PokemonDescription: Codable {
     let moves: [Move]
     let name: String
     let order: Int
-    let pastTypes: [JSONAny]
+    let pastAbilities, pastTypes: [JSONAny]
     let species: Species
     let sprites: Sprites
     let stats: [Stat]
@@ -43,8 +39,11 @@ struct PokemonDescription: Codable {
         case isDefault = "is_default"
         case locationAreaEncounters = "location_area_encounters"
         case moves, name, order
+        case pastAbilities = "past_abilities"
         case pastTypes = "past_types"
-        case species, sprites, stats, types, weight
+        case species
+        case sprites
+        case stats, types, weight
     }
 }
 
@@ -147,41 +146,22 @@ struct Versions: Codable {
 // MARK: - Sprites
 class Sprites: Codable {
     let backDefault: String
-    let backFemale: JSONNull?
     let backShiny: String
-    let backShinyFemale: JSONNull?
     let frontDefault: String
-    let frontFemale: JSONNull?
     let frontShiny: String
-    let frontShinyFemale: JSONNull?
-    let other: Other?
-    let versions: Versions?
-    let animated: Sprites?
 
     enum CodingKeys: String, CodingKey {
         case backDefault = "back_default"
-        case backFemale = "back_female"
         case backShiny = "back_shiny"
-        case backShinyFemale = "back_shiny_female"
         case frontDefault = "front_default"
-        case frontFemale = "front_female"
         case frontShiny = "front_shiny"
-        case frontShinyFemale = "front_shiny_female"
-        case other, versions, animated
     }
 
-    init(backDefault: String, backFemale: JSONNull?, backShiny: String, backShinyFemale: JSONNull?, frontDefault: String, frontFemale: JSONNull?, frontShiny: String, frontShinyFemale: JSONNull?, other: Other?, versions: Versions?, animated: Sprites?) {
+    init(backDefault: String, backShiny: String, frontDefault: String, frontShiny: String) {
         self.backDefault = backDefault
-        self.backFemale = backFemale
         self.backShiny = backShiny
-        self.backShinyFemale = backShinyFemale
         self.frontDefault = frontDefault
-        self.frontFemale = frontFemale
         self.frontShiny = frontShiny
-        self.frontShinyFemale = frontShinyFemale
-        self.other = other
-        self.versions = versions
-        self.animated = animated
     }
 }
 
