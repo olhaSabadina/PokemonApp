@@ -14,15 +14,12 @@ class ListPokemonViewModel {
     private var cancellable = Set<AnyCancellable>()
     
     @Published var pokemonsList: [PokemonModel] = []
-    @Published var error: Error? {
-        didSet {
-            print(error?.localizedDescription ?? "Yura")
-        }
-    }
+    @Published var error: Error?
     
     init() {
       fetchPokemons()
     }
+    
     func numberOfItemsInSection() -> Int {
         return pokemonsList.count
     }

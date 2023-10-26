@@ -22,6 +22,7 @@ class ListViewController: UIViewController {
         setView()
         setLightningsView()
         setCollectionView()
+        singToError()
         sinkToPokemons()
         setConstraints()
     }
@@ -39,6 +40,15 @@ class ListViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsConstants.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
+    }
+    
+    private func singToError() {
+        viewModel.$error
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                guard let error = error else { return }
+                self.showErrorAlert(message: error.localizedDescription)
+            }.store(in: &cancellable)
     }
     
     private func setLightningsView() {

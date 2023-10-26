@@ -38,6 +38,7 @@ class DetailViewController: UIViewController {
         setImageView()
         setChoosingSegmentView()
         setItemsOnView()
+        singToError()
         sinkToSkillModels()
         setConstraints()
     }
@@ -65,6 +66,15 @@ class DetailViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func singToError() {
+        viewModel.$error
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                guard let error = error else { return }
+                self.showErrorAlert(message: error.localizedDescription)
+            }.store(in: &subscribers)
     }
     
     private func setLeftBarButton() {

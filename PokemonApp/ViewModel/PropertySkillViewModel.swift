@@ -47,11 +47,7 @@ class PropertySkillViewModel {
     private var subscribers = Set<AnyCancellable>()
    
     @Published var cellModels: [SkillsCellModel] = []
-    @Published var error: Error? {
-        didSet{
-            print(error?.localizedDescription ?? "Yura" )
-        }
-    }
+    @Published var error: Error?
     
     init (pokemon: PokemonModel) {
         self.pokemon = pokemon
