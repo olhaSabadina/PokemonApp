@@ -40,7 +40,6 @@ class ListPokemonViewModel {
                     self.error = error
                 }
             } receiveValue: { pokemonArray in
-                
                 self.pokemonsList = pokemonArray.sorted { $0.name < $1.name }
             }
             .store(in: &cancellable)

@@ -10,10 +10,10 @@ import Combine
 
 class ListViewController: UIViewController {
     
-    var collectionView : UICollectionView?
-    var lightningsRedView = LightningsView()
-    var viewModel = ListPokemonViewModel()
-    var cancellable = Set<AnyCancellable>()
+    private var collectionView : UICollectionView?
+    private var lightningsView = LightningsView()
+    private var viewModel = ListPokemonViewModel()
+    private var cancellable = Set<AnyCancellable>()
     
     //MARK: - life cycle:
     
@@ -42,8 +42,8 @@ class ListViewController: UIViewController {
     }
     
     private func setLightningsView() {
-        lightningsRedView = LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596))
-        view.addSubview(lightningsRedView)
+        lightningsView = LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596))
+        view.addSubview(lightningsView)
     }
     
     //MARK: - fech pokemons func:
@@ -78,7 +78,7 @@ class ListViewController: UIViewController {
             let section = NSCollectionLayoutSection(group: group)
             return section
         }
-     return layout
+        return layout
     }
     
     // MARK: - set Constraints:
@@ -126,4 +126,3 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         navigationController?.pushViewController(descriptionVC, animated: false)
     }
 }
-

@@ -2,7 +2,7 @@
 //  SegmentButton.swift
 //  PokemonApp
 //
-//  Created by Yura Sabadin on 25.10.2023.
+//  Created by Olga Sabadina on 25.10.2023.
 //
 
 import UIKit
@@ -24,6 +24,7 @@ class SegmentButton: UIButton {
     
     func selectButton(_ isSelect: Bool) {
         self.redLine.isHidden = !isSelect
+        setTitleColor(!isSelect ? .label : .red, for: .normal)
     }
     
     private func setButton() {
@@ -31,7 +32,6 @@ class SegmentButton: UIButton {
         grayLine.backgroundColor = .lightGray.withAlphaComponent(0.5)
         redLine.translatesAutoresizingMaskIntoConstraints = false
         grayLine.translatesAutoresizingMaskIntoConstraints = false
-        setTitleColor(.label, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 13)
         addSubview(grayLine)
         addSubview(redLine)

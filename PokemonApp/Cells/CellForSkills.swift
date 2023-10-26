@@ -11,19 +11,18 @@ class CellForSkills: UITableViewCell {
     
     static var CellID = "CellForSkills"
     
-    var skillsNameLabel = UILabel()
-    var skillsDescriptionLabel = UILabel()
-    var skillsStack = UIStackView()
-    var skillsStackWithName = UIStackView()
+    private var skillsNameLabel = UILabel()
+    private var skillsDescriptionLabel = UILabel()
+    private var skillsStack = UIStackView()
+    private var skillsStackWithName = UIStackView()
+    private var isTitlePresent: Bool {
+        model?.titleProperty != nil
+    }
     var model: SkillsCellModel? {
         didSet {
             configureCell()
         }
     }
-    var isTitlePresent: Bool {
-        model?.titleProperty != nil
-    }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,6 +43,8 @@ class CellForSkills: UITableViewCell {
         skillsStackWithName.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
+    //MARK: -  Private function:
+    
     private func configureCell() {
         guard let model = model else { return }
         skillsNameLabel.text = model.titleProperty
@@ -60,7 +61,7 @@ class CellForSkills: UITableViewCell {
         skillsStackWithName.addArrangedSubview(skillsStack)
         if count != 0 {
             for _ in 0..<count {
-                let imageView = UIImageView(image: UIImage(named: "Vector"))
+                let imageView = UIImageView(image: ImageConstants.skillsStac)
                 imageView.contentMode = .scaleAspectFit
                 skillsStack.addArrangedSubview(imageView)
             }

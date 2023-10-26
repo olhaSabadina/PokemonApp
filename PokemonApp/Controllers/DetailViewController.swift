@@ -11,12 +11,12 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
-    var viewModel: PropertySkillViewModel
-    var nameLabel = UILabel()
-    var imageView = UIImageView()
-    let segmentedControl = PokemonSegmentControl()
-    let detailTable = UITableView()
-    var subscribers = Set<AnyCancellable>()
+    private let choosingSegmentView = ChoosingSegmentView()
+    private let detailTable = UITableView()
+    private var viewModel: PropertySkillViewModel
+    private var nameLabel = UILabel()
+    private var imageView = UIImageView()
+    private var subscribers = Set<AnyCancellable>()
     
     init(viewModel: PropertySkillViewModel) {
         self.viewModel = viewModel
@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
         setLeftBarButton()
         setNameLabel()
         setImageView()
-        setSegmentedControl()
+        setChoosingSegmentView()
         setItemsOnView()
         sinkToSkillModels()
         setConstraints()
@@ -57,15 +57,14 @@ class DetailViewController: UIViewController {
     }
     
     @objc func selectedTag(_ sender: UISegmentedControl) {
-       let selectedSegmentTag = sender.selectedSegmentIndex
-        viewModel.selectedTag = selectedSegmentTag        
+        let selectedSegmentTag = sender.selectedSegmentIndex
+        viewModel.selectedTag = selectedSegmentTag
     }
     
     //MARK: - Private func:
     
     private func setView() {
         view.backgroundColor = .systemBackground
-        
     }
     
     private func setLeftBarButton() {
@@ -91,10 +90,10 @@ class DetailViewController: UIViewController {
         view.addSubview(imageView)
     }
     
-    private func setSegmentedControl() {
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(segmentedControl)
-        segmentedControl.$selectedSegmentIndex
+    private func setChoosingSegmentView() {
+        choosingSegmentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(choosingSegmentView)
+        choosingSegmentView.$selectedSegmentIndex
             .sink { index in
                 self.viewModel.selectedTag = index
             }
@@ -128,8 +127,6 @@ class DetailViewController: UIViewController {
             .store(in: &subscribers)
     }
     
-    
-    
     //MARK: - Constraints:
     
     private func setConstraints() {
@@ -145,12 +142,12 @@ class DetailViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             imageView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
             
-            segmentedControl.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 30),
+            choosingSegmentView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            choosingSegmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            choosingSegmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            choosingSegmentView.heightAnchor.constraint(equalToConstant: 30),
             
-            detailTable.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            detailTable.topAnchor.constraint(equalTo: choosingSegmentView.bottomAnchor, constant: 10),
             detailTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             detailTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             detailTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
@@ -167,7 +164,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.CellID, for: indexPath) as? CellForSkills  else { return UITableViewCell() }
         
         cell.model = viewModel.cellModels[indexPath.row]
@@ -179,10 +175,3 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }
-
-//extension DetailViewController: UINavigationControllerDelegate {
-//
-////    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-////
-////    }
-//}

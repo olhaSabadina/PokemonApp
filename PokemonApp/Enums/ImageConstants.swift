@@ -9,4 +9,5 @@ import UIKit
 
 enum ImageConstants {
     static let backBarImage = UIImage(systemName: "arrow.backward")
+    static let skillsStac = UIImage(named: "Vector")
 }

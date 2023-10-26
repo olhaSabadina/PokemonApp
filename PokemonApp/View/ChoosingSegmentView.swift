@@ -2,13 +2,13 @@
 //  PokemonSegmentControl.swift
 //  PokemonApp
 //
-//  Created by Yura Sabadin on 25.10.2023.
+//  Created by Olga Sabadina on 25.10.2023.
 //
 
 import Combine
 import UIKit
 
-class PokemonSegmentControl: UIView {
+class ChoosingSegmentView: UIView {
     
     private let titleButtons = ["About","Stats","Evolution","Moves"]
     private var stackView = UIStackView()

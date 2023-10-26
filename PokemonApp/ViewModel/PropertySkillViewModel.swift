@@ -42,9 +42,9 @@ class PropertySkillViewModel {
         }
     }
     let pokemon: PokemonModel
-    var pokemonAbility: PokemonAbility? 
-    let networkManager = NetworkManager()
-    var subscribers = Set<AnyCancellable>()
+    private var pokemonAbility: PokemonAbility?
+    private let networkManager = NetworkManager()
+    private var subscribers = Set<AnyCancellable>()
    
     @Published var cellModels: [SkillsCellModel] = []
     @Published var error: Error? {
@@ -123,7 +123,6 @@ class PropertySkillViewModel {
                 models.append(model)
             }
         }
-        
         return models
     }
     
@@ -142,7 +141,6 @@ class PropertySkillViewModel {
                 self.cellModels = self.createCellModels(sectionTag: self.selectedTag)
             }
             .store(in: &subscribers)
-
     }
     
     func numberOfRowsInSection() -> Int {

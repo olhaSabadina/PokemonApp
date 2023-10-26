@@ -2,7 +2,7 @@
 //  String+Extension.swift
 //  PokemonApp
 //
-//  Created by Yura Sabadin on 25.10.2023.
+//  Created by Olga Sabadina on 25.10.2023.
 //
 
 import Foundation

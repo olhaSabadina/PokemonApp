@@ -10,7 +10,7 @@ import SDWebImage
 
 class ListCell: UICollectionViewCell {
 
-    static var CellID = "FirstScreenVCColletyionCell"
+    static var CellID = "ListCell"
     
     private let imageView = UIImageView()
     private var nameLabel = UILabel()
@@ -46,6 +46,7 @@ class ListCell: UICollectionViewCell {
         imageView.image = nil
         
     }
+    
     //MARK: -  Private function:
     
     private func updateCell() {

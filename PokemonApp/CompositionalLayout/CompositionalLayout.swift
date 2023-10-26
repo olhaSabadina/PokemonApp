@@ -2,7 +2,7 @@
 //  CompositionalLayout.swift
 //  PokemonApp
 //
-//  Created by Olya Sabadina on 10.10.2023.
+//  Created by Olga Sabadina on 10.10.2023.
 //
 
 import UIKit
@@ -44,4 +44,3 @@ struct CompositionalLayout {
         }
     }
 }
-
