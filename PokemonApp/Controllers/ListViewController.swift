@@ -115,10 +115,15 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
         
         let descriptionVC = DetailViewController(viewModel: propertyViewModel)
-
-        navigationController?.pushViewController(descriptionVC, animated: true)
         
+        let transition = CATransition()
+        transition.type = CATransitionType.fade
+        transition.duration = 1
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        navigationController?.pushViewController(descriptionVC, animated: false)
     }
-    
 }
 

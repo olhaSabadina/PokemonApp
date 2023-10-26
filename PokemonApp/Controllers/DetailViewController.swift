@@ -42,10 +42,18 @@ class DetailViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let transition = CATransition()
+        transition.type = CATransitionType.fade
+        transition.duration = 0.5
+        view.window?.layer.add(transition, forKey: kCATransition)
+    }
+    
     //MARK: - @obj func:
     
     @objc func backToPokemonsListViewController() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
     
     @objc func selectedTag(_ sender: UISegmentedControl) {
@@ -171,3 +179,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }
+
+//extension DetailViewController: UINavigationControllerDelegate {
+//
+////    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+////
+////    }
+//}
