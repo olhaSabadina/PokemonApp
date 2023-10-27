@@ -11,15 +11,16 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
+    private let backBarImage = UIImage(systemName: "arrow.backward")
     private let choosingSegmentView = ChoosingSegmentView()
     private let detailTable = UITableView()
-    private var viewModel: PropertySkillViewModel
+    private var propertySkillViewModel: PropertySkillViewModel
     private var nameLabel = UILabel()
     private var imageView = UIImageView()
     private var subscribers = Set<AnyCancellable>()
     
     init(viewModel: PropertySkillViewModel) {
-        self.viewModel = viewModel
+        self.propertySkillViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,7 +60,7 @@ class DetailViewController: UIViewController {
     
     @objc func selectedTag(_ sender: UISegmentedControl) {
         let selectedSegmentTag = sender.selectedSegmentIndex
-        viewModel.selectedTag = selectedSegmentTag
+        propertySkillViewModel.selectedTag = selectedSegmentTag
     }
     
     //MARK: - Private func:
@@ -69,7 +70,7 @@ class DetailViewController: UIViewController {
     }
     
     private func singToError() {
-        viewModel.$error
+        propertySkillViewModel.$error
             .receive(on: DispatchQueue.main)
             .sink { error in
                 guard let error = error else { return }
@@ -79,7 +80,7 @@ class DetailViewController: UIViewController {
     
     private func setLeftBarButton() {
         let backButton = UIButton(type: .system)
-        backButton.setImage(ImageConstants.backBarImage, for: .normal)
+        backButton.setImage(backBarImage, for: .normal)
         backButton.sizeToFit()
         backButton.tintColor = .label
         backButton.addTarget(self, action: #selector(backToPokemonsListViewController), for: .touchUpInside)
@@ -105,13 +106,13 @@ class DetailViewController: UIViewController {
         view.addSubview(choosingSegmentView)
         choosingSegmentView.$selectedSegmentIndex
             .sink { index in
-                self.viewModel.selectedTag = index
+                self.propertySkillViewModel.selectedTag = index
             }
             .store(in: &subscribers)
     }
     
     private func setDetailTable() {
-        detailTable.register(CellForSkills.self, forCellReuseIdentifier: CellForSkills.CellID)
+        detailTable.register(CellForSkills.self, forCellReuseIdentifier: CellForSkills.cellID)
         detailTable.delegate = self
         detailTable.dataSource = self
         detailTable.separatorStyle = .none
@@ -121,15 +122,15 @@ class DetailViewController: UIViewController {
     }
     
     private func setItemsOnView() {
-        nameLabel.text = viewModel.pokemon.name.capitalizeFirstLetter()
-        guard let urlImage = URL(string: viewModel.pokemon.sprites.frontDefault) else {
+        nameLabel.text = propertySkillViewModel.pokemon.name.capitalizeFirstLetter()
+        guard let urlImage = URL(string: propertySkillViewModel.pokemon.sprites.frontDefault) else {
             return
         }
         imageView.sd_setImage(with: urlImage)
     }
     
     private func sinkToSkillModels() {
-        viewModel.$cellModels
+        propertySkillViewModel.$cellModels
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.detailTable.reloadData()
@@ -170,13 +171,13 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection()
+        return propertySkillViewModel.numberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.CellID, for: indexPath) as? CellForSkills  else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellForSkills.cellID, for: indexPath) as? CellForSkills  else { return UITableViewCell() }
         
-        cell.model = viewModel.cellModels[indexPath.row]
+        cell.skillsCellModel = propertySkillViewModel.cellModels[indexPath.row]
         
         return cell
     }

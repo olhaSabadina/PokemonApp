@@ -10,9 +10,10 @@ import Combine
 
 class ListViewController: UIViewController {
     
+    private let titleListVC = "Know Them All"
     private var collectionView : UICollectionView?
     private var lightningsView = LightningsView()
-    private var viewModel = ListPokemonViewModel()
+    private var listPokemonViewModel = ListPokemonViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     //MARK: - life cycle:
@@ -36,14 +37,14 @@ class ListViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .systemBackground
-        title = TitleConstants.title
+        title = titleListVC
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsConstants.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
     }
     
     private func singToError() {
-        viewModel.$error
+        listPokemonViewModel.$error
             .receive(on: DispatchQueue.main)
             .sink { error in
                 guard let error = error else { return }
@@ -59,7 +60,7 @@ class ListViewController: UIViewController {
     //MARK: - fech pokemons func:
     
     private func sinkToPokemons() {
-        viewModel.$pokemonsList
+        listPokemonViewModel.$pokemonsList
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.collectionView?.reloadData()
@@ -70,7 +71,7 @@ class ListViewController: UIViewController {
     
     private func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView?.register(ListCell.self, forCellWithReuseIdentifier: ListCell.CellID)
+        collectionView?.register(ListCell.self, forCellWithReuseIdentifier: ListCell.cellID)
         collectionView?.backgroundColor = .clear
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -108,12 +109,12 @@ class ListViewController: UIViewController {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.numberOfItemsInSection()
+        listPokemonViewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.CellID, for: indexPath) as? ListCell else {return UICollectionViewCell()}
-        cell.pokemon = viewModel.pokemonsList[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.cellID, for: indexPath) as? ListCell else {return UICollectionViewCell()}
+        cell.pokemon = listPokemonViewModel.pokemonsList[indexPath.item]
         return cell
     }
     

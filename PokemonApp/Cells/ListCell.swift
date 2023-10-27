@@ -10,7 +10,7 @@ import SDWebImage
 
 class ListCell: UICollectionViewCell {
 
-    static var CellID = "ListCell"
+    static var cellID = "ListCell"
     
     private let imageView = UIImageView()
     private var nameLabel = UILabel()
@@ -61,11 +61,12 @@ class ListCell: UICollectionViewCell {
     
     private func configureCell() {
         backgroundColor = .systemBackground
-        setShadow(colorShadow: .gray,
-                  offset: .init(width: 5, height: 5),
-                  opacity: 5,
-                  radius: 5,
-                  cornerRadius: 5)
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = .init(width: 5, height: 5)
+        layer.shadowOpacity = 5
+        layer.shadowRadius = 5
+        layer.masksToBounds = false
+        layer.cornerRadius = 5
     }
     
     private func setLabels() {

@@ -1,5 +1,5 @@
 //
-//  ViewController+Extension.swift
+//  ViewController+Alert.swift
 //  PokemonApp
 //
 //  Created by Olga Sabadina on 26.10.2023.

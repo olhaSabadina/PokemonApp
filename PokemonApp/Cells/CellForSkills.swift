@@ -9,16 +9,17 @@ import UIKit
 
 class CellForSkills: UITableViewCell {
     
-    static var CellID = "CellForSkills"
+    static var cellID = "CellForSkills"
     
+    private let skillsStackImage = UIImage(named: "Vector")
     private var skillsNameLabel = UILabel()
     private var skillsDescriptionLabel = UILabel()
     private var skillsStack = UIStackView()
     private var skillsStackWithName = UIStackView()
     private var isTitlePresent: Bool {
-        model?.titleProperty != nil
+        skillsCellModel?.titleProperty != nil
     }
-    var model: SkillsCellModel? {
+    var skillsCellModel: SkillsCellModel? {
         didSet {
             configureCell()
         }
@@ -46,7 +47,7 @@ class CellForSkills: UITableViewCell {
     //MARK: -  Private function:
     
     private func configureCell() {
-        guard let model = model else { return }
+        guard let model = skillsCellModel else { return }
         skillsNameLabel.text = model.titleProperty
         skillsDescriptionLabel.text = model.valueProperty
         configureStack(count: model.attackPowerCount)
@@ -54,14 +55,14 @@ class CellForSkills: UITableViewCell {
     
     private func configureStack(count: Int) {
         
-        if model?.titleProperty != nil {
+        if skillsCellModel?.titleProperty != nil {
             skillsStackWithName.addArrangedSubview(skillsNameLabel)
             skillsNameLabel.widthAnchor.constraint(equalToConstant: 110).isActive = true
         }
         skillsStackWithName.addArrangedSubview(skillsStack)
         if count != 0 {
             for _ in 0..<count {
-                let imageView = UIImageView(image: ImageConstants.skillsStac)
+                let imageView = UIImageView(image: skillsStackImage)
                 imageView.contentMode = .scaleAspectFit
                 skillsStack.addArrangedSubview(imageView)
             }
