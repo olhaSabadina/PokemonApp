@@ -10,7 +10,7 @@ import Combine
 
 class ListViewController: UIViewController {
     
-    weak var coordinator: MainScreenCoordinator?
+    weak var coordinator: ListCoordinator?
     var listPokemonViewModel: ListPokemonViewModel?
     
     private var collectionView : UICollectionView?

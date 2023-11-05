@@ -11,7 +11,7 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
-    weak var coordinator: DetailScreenCoordinator?
+    weak var coordinator: DetailSkillsCoordinator?
     
     private let backBarImage = UIImage(systemName: "arrow.backward")
     private let choosingSegmentView = ChoosingSegmentView()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainScreenCoordinator: CoordinatorProtocol {
+class ListCoordinator: CoordinatorProtocol {
    
     weak var parentCoordinator: AppCoordinator?
     
@@ -28,21 +28,6 @@ class MainScreenCoordinator: CoordinatorProtocol {
     
     func stop(andMoveTo: NextCoordinator? = nil) {
         parentCoordinator?.childDidFinish(self, moveToNext: andMoveTo)
-    }
-    
-    func openPokemomDescription(_ pokemon: PokemonModel) {
-        let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
-        
-        let descriptionVC = DetailViewController(viewModel: propertyViewModel)
-        
-        let transition = CATransition()
-        transition.type = CATransitionType.fade
-        transition.duration = 1
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        
-        navigationController.view.layer.add(transition, forKey: kCATransition)
-        
-        navigationController.pushViewController(descriptionVC, animated: false)
     }
     
 }

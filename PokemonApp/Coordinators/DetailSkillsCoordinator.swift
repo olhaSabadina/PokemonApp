@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailScreenCoordinator: CoordinatorProtocol {
+class DetailSkillsCoordinator: CoordinatorProtocol {
    
     weak var parentCoordinator: AppCoordinator?
     var pokemon: PokemonModel
