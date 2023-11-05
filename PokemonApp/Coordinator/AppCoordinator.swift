@@ -9,7 +9,7 @@ import UIKit
 
 enum NextCoordinator {
     case mainScreen
-    case pokemonDescription
+    case pokemonDescription(pokemon: PokemonModel)
 }
 
 class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
@@ -22,10 +22,21 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
     }
     
     func start() {
+        openListPokemon()
+    }
+    
+    func openListPokemon() {
         let mainCoordinator = MainScreenCoordinator(navController: navigationController)
         childCoordinators.append(mainCoordinator)
         mainCoordinator.parentCoordinator = self
         mainCoordinator.start()
+    }
+    
+    func openPokemonDescription(pokemon: PokemonModel) {
+       let detailCoordinator = DetailScreenCoordinator(navController: navigationController, pokemon: pokemon)
+        childCoordinators.append(detailCoordinator)
+        detailCoordinator.parentCoordinator = self
+        detailCoordinator.start()
     }
     
     func childDidFinish(_ coordinator : CoordinatorProtocol?, moveToNext: NextCoordinator? = nil) {
@@ -37,17 +48,16 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
                 break
             }
         }
-        guard let coordinator = moveToNext else { return }
-        moveTo(coordinator: coordinator)
+        guard let nextCoordinator = moveToNext else { return }
+        moveTo(coordinator: nextCoordinator)
     }
     
     private func moveTo(coordinator: NextCoordinator) {
         switch coordinator {
         case .mainScreen:
-            start()
-        case .pokemonDescription:
-           // goToSecondVC()
-            break
+            openListPokemon()
+        case .pokemonDescription(let pokemon):
+           openPokemonDescription(pokemon: pokemon)
         }
     }
     

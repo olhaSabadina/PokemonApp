@@ -1,39 +1,29 @@
 //
-//  MainScreenCoordinator.swift
-//  trainCoordinator
+//  DetailScreenCoordinator.swift
+//  PokemonApp
 //
 //  Created by Olga Sabadina on 05.11.2023.
 //
 
 import UIKit
 
-class MainScreenCoordinator: CoordinatorProtocol {
+class DetailScreenCoordinator: CoordinatorProtocol {
    
     weak var parentCoordinator: AppCoordinator?
-    
+    var pokemon: PokemonModel
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
     
-    init(navController: UINavigationController) {
+    init(navController: UINavigationController, pokemon: PokemonModel) {
         self.navigationController = navController
+        self.pokemon = pokemon
     }
     
     func start() {
-        let viewModel = ListPokemonViewModel()
-        let vc = ListViewController()
-        vc.listPokemonViewModel = viewModel
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func stop(andMoveTo: NextCoordinator? = nil) {
-        parentCoordinator?.childDidFinish(self, moveToNext: andMoveTo)
-    }
-    
-    func openPokemomDescription(_ pokemon: PokemonModel) {
         let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
         
         let descriptionVC = DetailViewController(viewModel: propertyViewModel)
+        descriptionVC.coordinator = self
         
         let transition = CATransition()
         transition.type = CATransitionType.fade
@@ -45,4 +35,7 @@ class MainScreenCoordinator: CoordinatorProtocol {
         navigationController.pushViewController(descriptionVC, animated: false)
     }
     
+    func stop(andMoveTo: NextCoordinator? = nil) {
+        parentCoordinator?.childDidFinish(self, moveToNext: andMoveTo)
+    }
 }

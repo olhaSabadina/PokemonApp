@@ -11,10 +11,10 @@ import Combine
 class ListViewController: UIViewController {
     
     weak var coordinator: MainScreenCoordinator?
+    var listPokemonViewModel: ListPokemonViewModel?
     
     private var collectionView : UICollectionView?
     private var lightningsView = LightningsView()
-    private var listPokemonViewModel = ListPokemonViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     //MARK: - life cycle:
@@ -44,7 +44,7 @@ class ListViewController: UIViewController {
     }
     
     private func sinkToError() {
-        listPokemonViewModel.$error
+        listPokemonViewModel?.$error
             .receive(on: DispatchQueue.main)
             .sink { error in
                 guard let error = error else { return }
@@ -60,7 +60,7 @@ class ListViewController: UIViewController {
     //MARK: - fech pokemons func:
     
     private func sinkToPokemons() {
-        listPokemonViewModel.$pokemonsList
+        listPokemonViewModel?.$pokemonsList
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.collectionView?.reloadData()
@@ -109,12 +109,12 @@ class ListViewController: UIViewController {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listPokemonViewModel.numberOfItemsInSection()
+        listPokemonViewModel?.numberOfItemsInSection() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.cellID, for: indexPath) as? ListCell else {return UICollectionViewCell()}
-        cell.pokemon = listPokemonViewModel.pokemonsList[indexPath.item]
+        cell.pokemon = listPokemonViewModel?.pokemonsList[indexPath.item]
         return cell
     }
     
@@ -123,6 +123,6 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         guard let pokemon = cell?.pokemon else { return }
         
-        coordinator?.openPokemomDescription(pokemon)        
+        coordinator?.stop(andMoveTo: .pokemonDescription(pokemon: pokemon))
   }
 }

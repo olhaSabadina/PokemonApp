@@ -21,6 +21,9 @@
 		201406442AF789510078386A /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406432AF789510078386A /* CoordinatorProtocol.swift */; };
 		201406462AF789640078386A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406452AF789630078386A /* AppCoordinator.swift */; };
 		201406482AF789CB0078386A /* MainScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406472AF789CB0078386A /* MainScreenCoordinator.swift */; };
+		2014064A2AF78EC80078386A /* DetailScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406492AF78EC70078386A /* DetailScreenCoordinator.swift */; };
+		2014064E2AF78F6F0078386A /* CustomTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014064C2AF78F6F0078386A /* CustomTransitionManager.swift */; };
+		2014064F2AF78F6F0078386A /* CustomTransitionAnimationHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014064D2AF78F6F0078386A /* CustomTransitionAnimationHomePage.swift */; };
 		2078DD3B2ADB2FBC0040095C /* SkillsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078DD3A2ADB2FBC0040095C /* SkillsCellModel.swift */; };
 		2078DD402ADC30300040095C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078DD3F2ADC30300040095C /* NetworkManager.swift */; };
 		2078DD422ADC3E390040095C /* PokemonsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078DD412ADC3E390040095C /* PokemonsListModel.swift */; };
@@ -56,6 +59,9 @@
 		201406432AF789510078386A /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		201406452AF789630078386A /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		201406472AF789CB0078386A /* MainScreenCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenCoordinator.swift; sourceTree = "<group>"; };
+		201406492AF78EC70078386A /* DetailScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenCoordinator.swift; sourceTree = "<group>"; };
+		2014064C2AF78F6F0078386A /* CustomTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionManager.swift; sourceTree = "<group>"; };
+		2014064D2AF78F6F0078386A /* CustomTransitionAnimationHomePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimationHomePage.swift; sourceTree = "<group>"; };
 		2078DD3A2ADB2FBC0040095C /* SkillsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsCellModel.swift; sourceTree = "<group>"; };
 		2078DD3F2ADC30300040095C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2078DD412ADC3E390040095C /* PokemonsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListModel.swift; sourceTree = "<group>"; };
@@ -199,8 +205,18 @@
 				201406432AF789510078386A /* CoordinatorProtocol.swift */,
 				201406452AF789630078386A /* AppCoordinator.swift */,
 				201406472AF789CB0078386A /* MainScreenCoordinator.swift */,
+				201406492AF78EC70078386A /* DetailScreenCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		2014064B2AF78F6F0078386A /* CustomTransitionManager */ = {
+			isa = PBXGroup;
+			children = (
+				2014064C2AF78F6F0078386A /* CustomTransitionManager.swift */,
+				2014064D2AF78F6F0078386A /* CustomTransitionAnimationHomePage.swift */,
+			);
+			path = CustomTransitionManager;
 			sourceTree = "<group>";
 		};
 		2078DD382ADB26DF0040095C /* Cells */ = {
@@ -224,6 +240,7 @@
 		2078DD3E2ADC2FCC0040095C /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				2014064B2AF78F6F0078386A /* CustomTransitionManager */,
 				2078DD3F2ADC30300040095C /* NetworkManager.swift */,
 			);
 			path = Manager;
@@ -336,15 +353,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2014064F2AF78F6F0078386A /* CustomTransitionAnimationHomePage.swift in Sources */,
 				207D90942AD844280023E309 /* CellForSkills.swift in Sources */,
 				2008F5BC2AD5518A00BDD1A9 /* ListViewController.swift in Sources */,
 				207D908C2AD69C8B0023E309 /* LightningsView.swift in Sources */,
+				2014064E2AF78F6F0078386A /* CustomTransitionManager.swift in Sources */,
 				9C6BA8072AE9871600260A0D /* SegmentButton.swift in Sources */,
 				2008F5B82AD5518A00BDD1A9 /* AppDelegate.swift in Sources */,
 				2008F5E42AD5D01F00BDD1A9 /* ListCell.swift in Sources */,
 				201406462AF789640078386A /* AppCoordinator.swift in Sources */,
 				201406442AF789510078386A /* CoordinatorProtocol.swift in Sources */,
 				2008F5E22AD5CB1400BDD1A9 /* PropertySkillViewModel.swift in Sources */,
+				2014064A2AF78EC80078386A /* DetailScreenCoordinator.swift in Sources */,
 				2078DD422ADC3E390040095C /* PokemonsListModel.swift in Sources */,
 				20F8C1392AEAB28F0039128D /* ViewController+Alert.swift in Sources */,
 				2008F5D82AD5882500BDD1A9 /* FontsConstants.swift in Sources */,

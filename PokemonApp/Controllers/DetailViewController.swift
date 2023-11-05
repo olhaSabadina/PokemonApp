@@ -11,6 +11,8 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
+    weak var coordinator: DetailScreenCoordinator?
+    
     private let backBarImage = UIImage(systemName: "arrow.backward")
     private let choosingSegmentView = ChoosingSegmentView()
     private let detailTable = UITableView()
@@ -55,7 +57,7 @@ class DetailViewController: UIViewController {
     //MARK: - @obj func:
     
     @objc func backToPokemonsListViewController() {
-        navigationController?.popViewController(animated: false)
+        coordinator?.stop(andMoveTo: .mainScreen)
     }
     
     @objc func selectedTag(_ sender: UISegmentedControl) {
