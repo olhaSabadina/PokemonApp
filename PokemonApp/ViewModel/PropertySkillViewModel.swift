@@ -109,7 +109,9 @@ class PropertySkillViewModel {
             case .attack:
                 let attackPower = Int.random(in: 1...5)
                 let model = SkillsCellModel(titleProperty: SkillProperties.attack.title,
-                                            valueProperty: pokemon.abilities[1].ability.name.capitalizeFirstLetter(), attackPowerCount: attackPower)
+                                            valueProperty: pokemon.abilities.count > 1 ?
+                                            pokemon.abilities[1].ability.name.capitalizeFirstLetter() : "Attack power",
+                                            attackPowerCount: attackPower)
                 models.append(model)
             case .damage:
                 let model = SkillsCellModel(titleProperty: SkillProperties.damage.title,
