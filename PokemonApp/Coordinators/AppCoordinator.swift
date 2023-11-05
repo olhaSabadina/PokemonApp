@@ -25,20 +25,6 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
         openListPokemon()
     }
     
-    func openListPokemon() {
-        let mainCoordinator = ListCoordinator(navController: navigationController)
-        childCoordinators.append(mainCoordinator)
-        mainCoordinator.parentCoordinator = self
-        mainCoordinator.start()
-    }
-    
-    func openPokemonDescription(pokemon: PokemonModel) {
-       let detailCoordinator = DetailSkillsCoordinator(navController: navigationController, pokemon: pokemon)
-        childCoordinators.append(detailCoordinator)
-        detailCoordinator.parentCoordinator = self
-        detailCoordinator.start()
-    }
-    
     func childDidFinish(_ coordinator : CoordinatorProtocol?, moveToNext: NextCoordinator? = nil) {
        
         for (index, child) in childCoordinators.enumerated() {
@@ -59,6 +45,20 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
         case .pokemonDescription(let pokemon):
            openPokemonDescription(pokemon: pokemon)
         }
+    }
+    
+    private func openListPokemon() {
+        let mainCoordinator = ListCoordinator(navController: navigationController)
+        childCoordinators.append(mainCoordinator)
+        mainCoordinator.parentCoordinator = self
+        mainCoordinator.start()
+    }
+    
+    private func openPokemonDescription(pokemon: PokemonModel) {
+       let detailCoordinator = DetailSkillsCoordinator(navController: navigationController, pokemon: pokemon)
+        childCoordinators.append(detailCoordinator)
+        detailCoordinator.parentCoordinator = self
+        detailCoordinator.start()
     }
     
 }

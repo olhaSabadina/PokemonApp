@@ -10,11 +10,11 @@ import Combine
 
 class ListPokemonViewModel {
     
-    private let networkManager = NetworkManager()
-    private var cancellable = Set<AnyCancellable>()
-    
     @Published var pokemonsList: [PokemonModel] = []
     @Published var error: Error?
+    
+    private let networkManager = NetworkManager()
+    private var cancellable = Set<AnyCancellable>()
     
     init() {
       fetchPokemons()

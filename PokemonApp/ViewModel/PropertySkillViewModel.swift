@@ -36,19 +36,20 @@ enum SkillProperties: CaseIterable {
 
 class PropertySkillViewModel {
     
+    @Published var cellModels: [SkillsCellModel] = []
+    @Published var error: Error?
+    
+    let pokemon: PokemonModel
     var selectedTag: Int = 0 {
         didSet{
           cellModels = createCellModels(sectionTag: selectedTag)
         }
     }
-    let pokemon: PokemonModel
+    
     private var pokemonAbility: PokemonAbility?
     private let networkManager = NetworkManager()
     private var subscribers = Set<AnyCancellable>()
    
-    @Published var cellModels: [SkillsCellModel] = []
-    @Published var error: Error?
-    
     init (pokemon: PokemonModel) {
         self.pokemon = pokemon
         loadPokemonAbility()

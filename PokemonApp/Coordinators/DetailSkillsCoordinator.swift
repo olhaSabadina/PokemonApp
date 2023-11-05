@@ -10,6 +10,7 @@ import UIKit
 class DetailSkillsCoordinator: CoordinatorProtocol {
    
     weak var parentCoordinator: AppCoordinator?
+    
     var pokemon: PokemonModel
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
