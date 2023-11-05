@@ -10,7 +10,8 @@ import Combine
 
 class ListViewController: UIViewController {
     
-    private let titleListVC = "Know Them All"
+    weak var coordinator: MainScreenCoordinator?
+    
     private var collectionView : UICollectionView?
     private var lightningsView = LightningsView()
     private var listPokemonViewModel = ListPokemonViewModel()
@@ -23,7 +24,7 @@ class ListViewController: UIViewController {
         setView()
         setLightningsView()
         setCollectionView()
-        singToError()
+        sinkToError()
         sinkToPokemons()
         setConstraints()
     }
@@ -37,13 +38,12 @@ class ListViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .systemBackground
-        title = titleListVC
-        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Know Them All"
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: FontsConstants.latoBold, size: 26) ?? UIFont.systemFont(ofSize: 34)]
     }
     
-    private func singToError() {
+    private func sinkToError() {
         listPokemonViewModel.$error
             .receive(on: DispatchQueue.main)
             .sink { error in
@@ -123,17 +123,6 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         guard let pokemon = cell?.pokemon else { return }
         
-        let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
-        
-        let descriptionVC = DetailViewController(viewModel: propertyViewModel)
-        
-        let transition = CATransition()
-        transition.type = CATransitionType.fade
-        transition.duration = 1
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        
-        navigationController?.pushViewController(descriptionVC, animated: false)
-    }
+        coordinator?.openPokemomDescription(pokemon)        
+  }
 }
