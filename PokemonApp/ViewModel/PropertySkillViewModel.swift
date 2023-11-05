@@ -40,6 +40,7 @@ class PropertySkillViewModel {
     @Published var error: Error?
     
     let pokemon: PokemonModel
+    
     var selectedTag: Int = 0 {
         didSet{
           cellModels = createCellModels(sectionTag: selectedTag)
