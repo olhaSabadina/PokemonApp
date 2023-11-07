@@ -48,10 +48,10 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
     }
     
     private func openListPokemon() {
-        let mainCoordinator = ListCoordinator(navController: navigationController)
-        childCoordinators.append(mainCoordinator)
-        mainCoordinator.parentCoordinator = self
-        mainCoordinator.start()
+        let listCoordinator = ListCoordinator(navController: navigationController)
+        childCoordinators.append(listCoordinator)
+        listCoordinator.parentCoordinator = self
+        listCoordinator.start()
     }
     
     private func openPokemonDescription(pokemon: PokemonModel) {
