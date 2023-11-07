@@ -40,6 +40,9 @@ class PropertySkillViewModel {
     @Published var error: Error?
     
     let pokemon: PokemonModel
+    private var pokemonAbility: PokemonAbility?
+    private let networkManager: NetworkProtocol
+    private var subscribers = Set<AnyCancellable>()
     
     var selectedTag: Int = 0 {
         didSet{
@@ -47,11 +50,8 @@ class PropertySkillViewModel {
         }
     }
     
-    private var pokemonAbility: PokemonAbility?
-    private let networkManager = NetworkManager()
-    private var subscribers = Set<AnyCancellable>()
-   
-    init (pokemon: PokemonModel) {
+    init (networkManager: NetworkProtocol, pokemon: PokemonModel) {
+        self.networkManager = networkManager
         self.pokemon = pokemon
         loadPokemonAbility()
     }

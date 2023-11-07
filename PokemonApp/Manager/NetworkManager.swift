@@ -8,24 +8,11 @@
 import Foundation
 import Combine
 
- enum EndpointsURL {
-     static let baseUrl = "https://pokeapi.co/api/v2/"
-     static let pokemonsList = "ability/?limit=20"
-    
-     case pokemonUrls
-     case pokemonFromID (Int)
-     
-     var url: String {
-         switch self {
-         case .pokemonUrls:
-             return EndpointsURL.baseUrl + EndpointsURL.pokemonsList
-         case .pokemonFromID(let id):
-             return EndpointsURL.baseUrl + "pokemon/\(id)/"
-         }
-     }
+protocol NetworkProtocol {
+    func fetchPokemon<T:Codable>(urlString: String, type: T.Type) -> AnyPublisher<T,Error>
 }
 
-struct NetworkManager {
+struct NetworkManager: NetworkProtocol {
     
     func fetchPokemon<T:Codable>(urlString: String, type: T.Type) -> AnyPublisher<T,Error> {
 

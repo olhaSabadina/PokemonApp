@@ -20,6 +20,7 @@
 		2008F5E72AD5E73E00BDD1A9 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */; };
 		200EA3912AF7E7C700D37162 /* PokemonDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EA3902AF7E7C700D37162 /* PokemonDescriptionTests.swift */; };
 		200EA3932AF7ED8B00D37162 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 200EA3922AF7ED8B00D37162 /* SDWebImage */; };
+		200EA3952AFA3CD800D37162 /* EndpointsURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EA3942AFA3CD800D37162 /* EndpointsURL.swift */; };
 		201406442AF789510078386A /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406432AF789510078386A /* CoordinatorProtocol.swift */; };
 		201406462AF789640078386A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406452AF789630078386A /* AppCoordinator.swift */; };
 		201406482AF789CB0078386A /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201406472AF789CB0078386A /* ListCoordinator.swift */; };
@@ -41,7 +42,7 @@
 		9C3AE2D82AE9419F008BC69F /* PokemonAbility..swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3AE2D72AE9419F008BC69F /* PokemonAbility..swift */; };
 		9C6BA8072AE9871600260A0D /* SegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6BA8062AE9871600260A0D /* SegmentButton.swift */; };
 		9C6BA80B2AE9895500260A0D /* ChoosingSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6BA80A2AE9895500260A0D /* ChoosingSegmentView.swift */; };
-		9C6BA80D2AE99FF300260A0D /* ListPokemonViwModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6BA80C2AE99FF300260A0D /* ListPokemonViwModel.swift */; };
+		9C6BA80D2AE99FF300260A0D /* ListPokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6BA80C2AE99FF300260A0D /* ListPokemonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +76,9 @@
 		2008F5E12AD5CB1400BDD1A9 /* PropertySkillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySkillViewModel.swift; sourceTree = "<group>"; };
 		2008F5E32AD5D01F00BDD1A9 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
-		200EA38D2AF7E57700D37162 /* PokemonApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; name = PokemonApp.xctestplan; path = PokemonApp/Resourses/PokemonApp.xctestplan; sourceTree = SOURCE_ROOT; };
+		200EA38D2AF7E57700D37162 /* PokemonApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PokemonApp.xctestplan; path = PokemonApp/Resourses/PokemonApp.xctestplan; sourceTree = SOURCE_ROOT; };
 		200EA3902AF7E7C700D37162 /* PokemonDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDescriptionTests.swift; sourceTree = "<group>"; };
+		200EA3942AFA3CD800D37162 /* EndpointsURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointsURL.swift; sourceTree = "<group>"; };
 		201406432AF789510078386A /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		201406452AF789630078386A /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		201406472AF789CB0078386A /* ListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		9C3AE2D72AE9419F008BC69F /* PokemonAbility..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAbility..swift; sourceTree = "<group>"; };
 		9C6BA8062AE9871600260A0D /* SegmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentButton.swift; sourceTree = "<group>"; };
 		9C6BA80A2AE9895500260A0D /* ChoosingSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosingSegmentView.swift; sourceTree = "<group>"; };
-		9C6BA80C2AE99FF300260A0D /* ListPokemonViwModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPokemonViwModel.swift; sourceTree = "<group>"; };
+		9C6BA80C2AE99FF300260A0D /* ListPokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPokemonViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +181,7 @@
 		2008F5CC2AD557E300BDD1A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9C6BA80C2AE99FF300260A0D /* ListPokemonViwModel.swift */,
+				9C6BA80C2AE99FF300260A0D /* ListPokemonViewModel.swift */,
 				2008F5E12AD5CB1400BDD1A9 /* PropertySkillViewModel.swift */,
 			);
 			path = ViewModel;
@@ -268,6 +270,7 @@
 				9C3AE2D52AE930A6008BC69F /* String+Extension.swift */,
 				20F8C1382AEAB28F0039128D /* ViewController+Alert.swift */,
 				2008F5E62AD5E73E00BDD1A9 /* CompositionalLayout.swift */,
+				200EA3942AFA3CD800D37162 /* EndpointsURL.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -483,7 +486,8 @@
 				2008F5E72AD5E73E00BDD1A9 /* CompositionalLayout.swift in Sources */,
 				9C3AE2D82AE9419F008BC69F /* PokemonAbility..swift in Sources */,
 				2078DD442ADC42BA0040095C /* PokemonModel.swift in Sources */,
-				9C6BA80D2AE99FF300260A0D /* ListPokemonViwModel.swift in Sources */,
+				200EA3952AFA3CD800D37162 /* EndpointsURL.swift in Sources */,
+				9C6BA80D2AE99FF300260A0D /* ListPokemonViewModel.swift in Sources */,
 				9C6BA80B2AE9895500260A0D /* ChoosingSegmentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

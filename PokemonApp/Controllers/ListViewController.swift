@@ -14,14 +14,13 @@ class ListViewController: UIViewController {
     var listPokemonViewModel: ListPokemonViewModel?
     
     private var collectionView : UICollectionView?
-    private var lightningsView = LightningsView()
     private var cancellable = Set<AnyCancellable>()
     
     //MARK: - life cycle:
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setView()
+        configureListView()
         setLightningsView()
         setCollectionView()
         sinkToError()
@@ -36,7 +35,7 @@ class ListViewController: UIViewController {
     
     // MARK: - set view func:
     
-    private func setView() {
+    private func configureListView() {
         view.backgroundColor = .systemBackground
         title = "Know Them All"
         navigationController?.navigationItem.largeTitleDisplayMode = .always
@@ -53,8 +52,7 @@ class ListViewController: UIViewController {
     }
     
     private func setLightningsView() {
-        lightningsView = LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596))
-        view.addSubview(lightningsView)
+        view.addSubview(LightningsView(frame: .init(x: 100, y: 0, width: 268, height: 596)))
     }
     
     //MARK: - fech pokemons func:
@@ -67,7 +65,22 @@ class ListViewController: UIViewController {
             }.store(in: &cancellable)
     }
     
-    // MARK: - CollectionView:
+    // MARK: - set Constraints:
+    
+    private func setConstraints() {
+        guard let collectionView = collectionView else { return }
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: navigationItem.titleView?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+}
+
+// MARK: - CollectionView:
+
+extension ListViewController {
     
     private func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -91,19 +104,8 @@ class ListViewController: UIViewController {
         }
         return layout
     }
-    
-    // MARK: - set Constraints:
-    
-    private func setConstraints() {
-        guard let collectionView = collectionView else { return }
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: navigationItem.titleView?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
 }
+
 //MARK: - CollectionViewDelegate, DataSource:
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -124,5 +126,5 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let pokemon = cell?.pokemon else { return }
         
         coordinator?.stop(andMoveTo: .pokemonDescription(pokemon: pokemon))
-  }
+    }
 }

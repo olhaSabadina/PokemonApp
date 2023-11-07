@@ -13,11 +13,12 @@ class ListPokemonViewModel {
     @Published var pokemonsList: [PokemonModel] = []
     @Published var error: Error?
     
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkProtocol
     private var cancellable = Set<AnyCancellable>()
     
-    init() {
-      fetchPokemons()
+    init(networkManager: NetworkProtocol) {
+        self.networkManager = networkManager
+        fetchPokemons()
     }
     
     func numberOfItemsInSection() -> Int {

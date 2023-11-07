@@ -19,7 +19,8 @@ class ListCoordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let viewModel = ListPokemonViewModel()
+        let networkManager = NetworkManager()
+        let viewModel = ListPokemonViewModel(networkManager: networkManager)
         let vc = ListViewController()
         vc.listPokemonViewModel = viewModel
         vc.coordinator = self

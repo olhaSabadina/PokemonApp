@@ -11,7 +11,7 @@ class DetailSkillsCoordinator: CoordinatorProtocol {
    
     weak var parentCoordinator: AppCoordinator?
     
-    var pokemon: PokemonModel
+    private var pokemon: PokemonModel
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
     
@@ -21,7 +21,8 @@ class DetailSkillsCoordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let propertyViewModel = PropertySkillViewModel(pokemon: pokemon)
+        let networkManager = NetworkManager()
+        let propertyViewModel = PropertySkillViewModel(networkManager: networkManager, pokemon: pokemon)
         
         let descriptionVC = DetailViewController(viewModel: propertyViewModel)
         descriptionVC.coordinator = self
