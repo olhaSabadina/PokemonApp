@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "382E1663-DC7B-4AE7-975E-D4511552B17D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PokemonApp.xcodeproj",
+        "identifier" : "208198152AF7CBE20075FCAD",
+        "name" : "PokemonAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PokemonApp.xcodeproj",
+        "identifier" : "208198222AF7CC210075FCAD",
+        "name" : "PokemonAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
