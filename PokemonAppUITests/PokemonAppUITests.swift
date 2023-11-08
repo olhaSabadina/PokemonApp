@@ -10,14 +10,7 @@ import XCTest
 
 final class PokemonAppUITests: XCTestCase {
 
-//    override func setUpWithError() throws {
-//        continueAfterFailure = false
-//    }
-//
-//    override func tearDownWithError() throws {
-//    }
-
-    func testExample() throws {
+    func testPokemonAppUI() throws {
         let app = XCUIApplication()
         app.launch()
         XCTAssert(app.waitForExistence(timeout: 5))
@@ -31,6 +24,4 @@ final class PokemonAppUITests: XCTestCase {
         app.staticTexts["Moves"].tap()
         app.navigationBars["PokemonApp.DetailView"].buttons["arrow.backward"].tap()
     }
-
-    
 }
