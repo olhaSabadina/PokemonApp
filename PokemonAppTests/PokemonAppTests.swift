@@ -10,30 +10,31 @@ import Combine
 @testable import PokemonApp
 
 final class PokemonAppTests: XCTestCase {
-
+    
     var listViewModel: ListPokemonViewModel?
     var cancellable = Set<AnyCancellable>()
     
     override func setUp() {
         super.setUp()
-        listViewModel = ListPokemonViewModel()
+        let networkManager = NetworkManager()
+        listViewModel = ListPokemonViewModel(networkManager: networkManager)
     }
-
+    
     override func tearDown() {
         super.tearDown()
         listViewModel = nil
         cancellable.removeAll()
     }
-
+    
     func testFetchPokemonList() {
-       let expectation = XCTestExpectation(description: "Fetch ListPokemon")
+        let expectation = XCTestExpectation(description: "Fetch ListPokemon")
         listViewModel?.$pokemonsList
             .drop { $0.isEmpty }
             .sink { value in
-            XCTAssertFalse(value.count == 0)
-            XCTAssert(value.count == 20)
-            expectation.fulfill()
-        }.store(in: &cancellable)
+                XCTAssertFalse(value.count == 0)
+                XCTAssert(value.count == 20)
+                expectation.fulfill()
+            }.store(in: &cancellable)
         
         wait(for: [expectation], timeout: 5.0)
     }

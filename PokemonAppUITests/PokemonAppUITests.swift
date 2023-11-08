@@ -10,12 +10,12 @@ import XCTest
 
 final class PokemonAppUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-    }
-
-    override func tearDownWithError() throws {
-    }
+//    override func setUpWithError() throws {
+//        continueAfterFailure = false
+//    }
+//
+//    override func tearDownWithError() throws {
+//    }
 
     func testExample() throws {
         let app = XCUIApplication()
